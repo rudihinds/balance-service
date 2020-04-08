@@ -11,7 +11,7 @@ def app_image_name = "sepractices/${github_id}-balance-service"
 def worker_image_name = "sepractices/${github_id}-balance-service-worker"
 
 def cluster_name   = 'prod-ak-k8s-cluster'
-def git_repository = 'https://github.com/${github_id}/balance-service.git'
+def git_repository = "https://github.com/${github_id}/balance-service.git"
 def kaniko_image = 'gcr.io/kaniko-project/executor:debug-b0e7c0e8cd07ef3ad2b7181e0779af9fcb312f0b'
 def kubectl_image = 'sepractices/jenkins-eks-kubectl-deployer:0.1.0'
 def label = "build-${UUID.randomUUID().toString()}"
@@ -120,7 +120,8 @@ podTemplate(name: "${namespace}-balance-service-build", label: label, yaml: buil
               --server=$KUBERNETES_SERVER \
               --certificate-authority=$KUBERNETES_CA
           '''
-          sh """kubectl config \
+          sh """
+            kubectl config \
               set-credentials aws \
               --exec-arg=token \
               --exec-arg=-i \
